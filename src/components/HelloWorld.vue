@@ -27,6 +27,7 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+    <button @click="reqApi"> api 테스트 </button>
   </div>
 </template>
 
@@ -35,6 +36,26 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  methods:{
+    reqApi : async function(data ={}){
+      let _rootPath = location.origin
+      let type = "POST"
+      let url = `${location.origin}/test/data`
+      const response = await fetch(url, {
+        method: type,
+        header:{
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': _rootPath,
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'origin' : _rootPath
+        },
+        body: JSON.stringify(data),
+      });
+
+      let result = await response.json();
+      console.log(result['result']);
+    }
   }
 }
 </script>
