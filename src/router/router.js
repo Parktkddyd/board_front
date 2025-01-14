@@ -11,6 +11,11 @@ const routes = [
     name: 'hello',
     component: HelloWorld,
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginView
+  }
 ];
 
 const router = new VueRouter({
