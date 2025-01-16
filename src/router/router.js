@@ -1,20 +1,20 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HelloWorld from "@/components/HelloWorld";
 import LoginView from "@/components/LoginView";
+import SignupView from "@/components/SignupView";
 
 Vue.use(VueRouter); 
 
 const routes = [
   {
-    path: '/',
-    name: 'hello',
-    component: HelloWorld,
-  },
-  {
     path: '/login',
     name: 'login',
     component: LoginView
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: SignupView
   }
 ];
 
