@@ -2,8 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import LoginView from "@/components/LoginView";
 import SignupView from "@/components/SignupView";
-
-Vue.use(VueRouter); 
+import SignupSuccess from "@/components/SignupSuccess"
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -15,11 +15,16 @@ const routes = [
     path: '/signup',
     name: 'signup',
     component: SignupView
+  },
+  {
+    path: '/signup/success',
+    name: SignupSuccess,
+    component: SignupSuccess
   }
 ];
 
 const router = new VueRouter({
-  mode: "history", 
+  mode: "history",
   routes: routes,
 });
 
