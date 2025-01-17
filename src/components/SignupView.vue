@@ -41,7 +41,7 @@
             @click="closeNotification"
             class="inline-flex text-gray-400 hover:text-gray-500 focus:outline-none"
           >
-            <span class="sr-only">Close</span>
+            <span class="sr-only">닫기</span>
             <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
               <path
                 fill-rule="evenodd"
@@ -261,6 +261,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   name: "SignupForm",
   data() {
@@ -330,7 +331,7 @@ export default {
     async checkUserId() {
       try {
         const response = await axios.post(
-          process.env.VUE_APP_BACK_URL + "/signup/duplicate",
+          process.env.VUE_APP_BACK_URL + "/users/signup/duplicate",
           {
             user_id: this.form.userId,
           }
@@ -451,7 +452,7 @@ export default {
       try {
         //API call
         const response = await axios.post(
-          process.env.VUE_APP_BACK_URL + "/signup/",
+          process.env.VUE_APP_BACK_URL + "/users/signup/",
           {
             user_id: this.form.userId,
             user_password: this.form.password,
