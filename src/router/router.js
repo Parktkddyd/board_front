@@ -19,7 +19,14 @@ const routes = [
   {
     path: '/signup/success',
     name: SignupSuccess,
-    component: SignupSuccess
+    component: SignupSuccess,
+    beforeEnter: (to, from, next) => {
+      if (from.name === 'signup') {
+        next();
+      } else {
+        console.log('error')
+      }
+    },
   }
 ];
 
