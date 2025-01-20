@@ -159,7 +159,7 @@
               class="mt-2 text-sm"
             >
               {{
-                passwordsMatch ? "Passwords match!" : "Passwords do not match"
+                passwordsMatch ? "비밀번호가 일치합니다!" : "비밀번호가 일치하지 않습니다"
               }}
             </p>
           </div>
@@ -452,7 +452,7 @@ export default {
       try {
         //API call
         const response = await axios.post(
-          process.env.VUE_APP_BACK_URL + "/users/signup/",
+          process.env.VUE_APP_BACK_URL + "/users/signup",
           {
             user_id: this.form.userId,
             user_password: this.form.password,
