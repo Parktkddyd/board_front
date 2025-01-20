@@ -1,0 +1,78 @@
+<template>
+  <nav class="sticky top-0 z-50 w-full border-b bg-white">
+    <div class="container mx-auto px-4 flex h-16 items-center justify-between">
+      <!-- Logo & Main Navigation -->
+      <div class="flex items-center gap-6">
+        <router-link to="/" class="text-xl font-bold">
+          테스트 게시판
+        </router-link>
+        <div class="hidden md:flex gap-4">
+          <router-link 
+            to="/"
+            class="text-sm font-medium transition-colors hover:text-blue-600"
+            :class="{ 'text-blue-600': $route.path === '/', 'text-gray-600': $route.path !== '/' }"
+          >
+            홈
+          </router-link>
+        </div>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="hidden md:flex flex-1 items-center justify-center px-6">
+        <div class="relative w-full max-w-md">
+          <input
+            type="search"
+            placeholder="Search posts..."
+            class="w-full px-8 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <span class="absolute left-2 top-2.5 text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <!-- Auth Buttons / User Actions -->
+      <div class="flex items-center gap-4">
+        <template v-if="isLoggedIn">
+          <span class="text-sm text-gray-600">{{ username }}</span>
+          <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+            New Post
+          </button>
+        </template>
+        <template v-else>
+          <router-link 
+            to="/login"
+            class="px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors"
+          >
+            로그인
+          </router-link>
+          <router-link 
+            to="/signup"
+            class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+          >
+            회원가입
+          </router-link>
+        </template>
+      </div>
+    </div>
+  </nav>
+</template>
+
+<script>
+export default {
+  name: 'NavigationBar',
+  data() {
+    return {
+      isLoggedIn: false, // This should be managed by your auth system
+      username: 'John Doe' // This should come from your auth system
+    }
+  }
+}
+</script>
