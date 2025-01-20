@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import LoginView from "@/components/LoginView";
 import SignupView from "@/components/SignupView";
 import SignupSuccess from "@/components/SignupSuccess"
+import Main from "@/components/Main"
 Vue.use(VueRouter);
 
 const routes = [
@@ -18,16 +19,9 @@ const routes = [
   },
   {
     path: '/signup/success',
-    name: SignupSuccess,
+    name: 'SignupSuccess',
     component: SignupSuccess,
-    beforeEnter: (to, from, next) => {
-      if (from.name === 'signup') {
-        next();
-      } else {
-        console.log('error')
-      }
-    },
-  }
+  },
 ];
 
 const router = new VueRouter({
