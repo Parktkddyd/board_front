@@ -132,6 +132,7 @@
 
 <script>
 import axios from "axios";
+import { mapActions } from 'vuex';
 
 export default {
   name: "LoginPage",
@@ -151,6 +152,8 @@ export default {
     };
   },
   methods: {
+    ...mapActions(['login']),
+
     validateForm() {
       let isValid = true;
       this.errors.userId = "";
@@ -180,12 +183,16 @@ export default {
           {
             user_id: this.form.userId,
             user_password: this.form.password,
+          },
+          {
+            withCredentials: true
           }
         );
 
         if (response.data.header.customStatusCode === "ACCOUNT-LOGIN-200") {
-          this.$router.push("/");
-          this.$emit("/");
+          await this.login(response.data.data.user_id);
+          await this.$nextTick();
+          await this.$router.replace("/").catch(()=>{});
         } else {
           // Handle different error codes
           switch (response.data.header.customStatusCode) {
@@ -202,7 +209,6 @@ export default {
                 "알 수 없는 오류가 발생했습니다. 잠시 후 다시 시도해 주십시오.";
           }
         }
-        this.$emit("login-success");
       } catch (error) {
         this.globalError =
           "알 수 없는 오류가 발생했습니다. 잠시 후 다시 시도해 주십시오.";

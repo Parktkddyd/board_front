@@ -2,7 +2,6 @@
   <div class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
     <div class="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center">
       <div class="mb-6">
-        <!-- Success Icon -->
         <div
           class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100"
         >
