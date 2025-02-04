@@ -7,13 +7,21 @@
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue'
-import Footer from './components/Footer.vue'
+import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
+import { mapActions } from 'vuex'
+
 export default {
   name: 'App',
   components: {
     Navbar,
     Footer
+  },
+  methods: {
+    ...mapActions(['checkAuth'])
+  },
+  async created(){
+    await this.checkAuth()
   }
 }
 </script>

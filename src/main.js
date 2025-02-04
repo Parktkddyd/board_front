@@ -1,9 +1,12 @@
 import Vue from 'vue'
-import 'tailwindcss/tailwind.css';
+import 'tailwindcss/tailwind.css'
 import App from './App.vue'
-import router from './router/router';
+import router from './router/router'
+import store from "@/components/store/store"
 
 new Vue({
   router,
-  render: h=> h(App)
+  store,
+  render: h => h(App)
 }).$mount("#app");
+
