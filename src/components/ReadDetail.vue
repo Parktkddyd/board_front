@@ -153,6 +153,10 @@
       <div class="bg-white rounded-lg shadow-sm p-6 prose max-w-none">
         {{ post.content }}
       </div>
+      <!-- 댓글 내용-->
+       <div v-if="!loading && !error">
+        <CreateComment :board-id="$route.params.id" />
+      </div>
 
       <!-- 삭제 모달-->
       <div v-if="showDeleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
@@ -182,9 +186,13 @@
 <script>
 import axios from 'axios'
 import { mapGetters } from 'vuex'
+import CreateComment from '@/components/CreateComment.vue'
 
 export default {
   name: 'ReadDetail',
+   components: {
+    CreateComment
+  },
   data() {
     return {
       loading: true,
@@ -218,14 +226,17 @@ export default {
       }
     },
     formatDate(date) {
-      return new Date(date).toLocaleDateString('KOR', {
+      const utcDate = new Date(date);
+      const kstDate = new Date(utcDate.getTime() - (9 * 60 * 60 * 1000));
+
+      return kstDate.toLocaleDateString('ko-KR', {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
       })
     },
     formatNumber(num) {
-      return new Intl.NumberFormat('KOR').format(num)
+      return new Intl.NumberFormat('ko-KR').format(num)
     },
     goToList() {
       this.$router.push('/')
@@ -242,7 +253,6 @@ export default {
         this.$router.push('/')
       } catch (err) {
         console.error('삭제 실패', err)
-        // You might want to show an error message here
       }
       this.showDeleteModal = false
     }
@@ -250,13 +260,12 @@ export default {
   async created() {
     await this.fetchPost()
   },
-  // Update title when post is loaded
   watch: {
     post: {
       immediate: true,
       handler(post) {
         if (post) {
-          document.title = `${post.title} - Your Site Name`
+          document.title = `${post.board_title} - 게시판`
         }
       }
     }
@@ -265,7 +274,6 @@ export default {
 </script>
 
 <style>
-/* Add any additional styles here */
 .prose {
   line-height: 1.75;
 }
