@@ -184,7 +184,7 @@ export default {
       try {
         const response = await axios.get(process.env.VUE_APP_BACK_URL + '/boards', {
           params: {
-            page: this.currentPage,
+            page: this.currentPage-1,
             size: this.pageSize,
           }
         })
@@ -204,14 +204,16 @@ export default {
       }
     },
     formatDate(date) {
-      return new Date(date).toLocaleDateString('KOR', {
+      const utcDate = new Date(date);
+      const kstDate = new Date(utcDate.getTime() - (9 * 60 * 60 * 1000));
+      return kstDate.toLocaleDateString('ko-KR', {
         year: 'numeric',
         month: 'short',
         day: 'numeric'
       })
     },
     formatNumber(num) {
-      return new Intl.NumberFormat('KOR').format(num)
+      return new Intl.NumberFormat('ko-KR').format(num)
     },
     async changePage(page) {
       if (page >= 1 && page <= this.totalPages) {
