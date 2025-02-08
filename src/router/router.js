@@ -28,6 +28,7 @@ const routes = [
     path: '/signup/success',
     name: 'SignupSuccess',
     component: SignupSuccess,
+    meta: { guest: true }
   },
   {
     path: '/',
@@ -37,17 +38,20 @@ const routes = [
   {
     path: '/boards/:id',
     name: 'ReadDetail',
-    component: ReadDetail
+    component: ReadDetail,
+    meta: { requiresAuth: true }
   },
   {
     path: '/post',
     name: 'CreatePost',
-    component: CreatePost
+    component: CreatePost,
+    meta: { requiresAuth: true }
   },
   {
     path: '/boards/:id/edit',
     name: 'EditPost',
-    component: EditPost
+    component: EditPost,
+    meta: { requiresAuth: true }
   },
   {
     path: '*',
@@ -63,10 +67,6 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  if (to.name === 'Error') {
-    next()
-    return
-  }
 
   const isAuthenticated = store.getters.isAuthenticated
 
