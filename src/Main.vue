@@ -3,25 +3,11 @@
     <!-- 정렬 -->
     <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
       <div class="flex gap-2">
-        <button class="px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-            <polyline points="17 6 23 6 23 12"></polyline>
-          </svg>
-          인기순
-        </button>
-        <button class="px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 6 12 12 16 14"></polyline>
-          </svg>
-          최신순
-        </button>
       </div>
     </div>
 
     <div class="flex items-center gap-2">
-          <label class="text-sm text-gray-600">페이지 당 :</label>
+          <label class="text-sm text-gray-600">페이지 당 게시글 수:</label>
           <select 
             v-model="pageSize" 
             class="px-3 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -124,8 +110,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   name: 'MainPage',
   data() {
@@ -182,7 +166,7 @@ export default {
       this.error = null
       
       try {
-        const response = await axios.get(process.env.VUE_APP_BACK_URL + '/boards', {
+        const response = await this.$axios.get(process.env.VUE_APP_BACK_URL + '/boards', {
           params: {
             page: this.currentPage-1,
             size: this.pageSize,

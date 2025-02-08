@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
-import Footer from '@/components/Footer.vue'
+import Navbar from '@/Navbar.vue'
+import Footer from '@/Footer.vue'
 import { mapActions } from 'vuex'
 
 export default {

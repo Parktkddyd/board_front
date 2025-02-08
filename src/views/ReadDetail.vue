@@ -24,7 +24,8 @@
       </div>
     </div>
 
-    <div v-else class="max-w-3xl mx-auto">
+  <ResponseWrapper v-else-if = "response" :response="response">
+    <div class="max-w-3xl mx-auto">
       <div class="flex justify-between items-center mb-6">
         <button 
           @click="goToList" 
@@ -88,7 +89,8 @@
           </button>
         </div>
       </div>
-
+      
+      <div v-if="post">
       <!-- 게시글 헤더 -->
       <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
         <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ post.board_title }}</h1>
@@ -178,8 +180,10 @@
             </button>
           </div>
         </div>
+        </div>
+       </div>
       </div>
-    </div>
+  </ResponseWrapper>
   </main>
 </template>
 
@@ -187,16 +191,19 @@
 import axios from 'axios'
 import { mapGetters } from 'vuex'
 import CreateComment from '@/components/CreateComment.vue'
+import ResponseWrapper from '@/components/ResponseWrapper.vue';
 
 export default {
   name: 'ReadDetail',
    components: {
+    ResponseWrapper,
     CreateComment
   },
   data() {
     return {
       loading: true,
       error: null,
+      response: null,
       post: null,
       showDeleteModal: false
     }
@@ -213,8 +220,12 @@ export default {
       this.error = null
       
       try {
-        const response = await axios.get(process.env.VUE_APP_BACK_URL + `/boards/${this.$route.params.id}`)
-        this.post = response.data.data
+        const {data} = await this.$axios.get(process.env.VUE_APP_BACK_URL + `/boards/${this.$route.params.id}`)
+        this.response = data
+    
+        if(data.header.statusCode == 200){
+          this.post = data.data
+        }
         
         //조회수 증가
         //await axios.post(`/api/posts/${this.$route.params.id}/view`)

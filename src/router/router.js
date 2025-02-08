@@ -1,13 +1,14 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
-import store from "@/components/store/store"
-import LoginView from "@/components/LoginView";
-import SignupView from "@/components/SignupView";
-import SignupSuccess from "@/components/SignupSuccess"
-import Main from "@/components/Main"
-import ReadDetail from "@/components/ReadDetail.vue";
-import CreatePost from "@/components/CreatePost.vue";
-import EditPost from "@/components/EditPost.vue";
+import VueRouter from "vue-router"
+import store from "@/store/store.js"
+import LoginView from "@/views/LoginView.vue"
+import SignupView from "@/views/SignupView.vue"
+import SignupSuccess from "@/views/SignupSuccess.vue"
+import Main from "@/Main.vue"
+import ReadDetail from "@/views/ReadDetail.vue"
+import CreatePost from "@/views/CreatePost.vue"
+import EditPost from "@/views/EditPost.vue"
+import NotFound from "@/views/NotFound.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -47,15 +48,26 @@ const routes = [
     path: '/boards/:id/edit',
     name: 'EditPost',
     component: EditPost
+  },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: NotFound
   }
 ];
 
 const router = new VueRouter({
   mode: "history",
+  base: process.env.BASE_URL,
   routes: routes,
 });
 
 router.beforeEach(async (to, from, next) => {
+  if (to.name === 'Error') {
+    next()
+    return
+  }
+
   const isAuthenticated = store.getters.isAuthenticated
 
   if (to.matched.some(record => record.meta.requiresAuth)) {

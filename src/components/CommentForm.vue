@@ -55,7 +55,7 @@
       <div v-if="showReplyForm" class="mt-2">
         <ReplyForm
           :board-id="boardId"
-          :comment-user-id="comment.user_id"
+          :parent-user-id="comment.user_id"
           :parent-id="comment.comment_id"
           @submit="handleReplySubmit"
           @cancel="toggleReplyForm"

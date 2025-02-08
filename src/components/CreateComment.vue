@@ -20,7 +20,7 @@
       <!-- 페이징 -->
       <div v-if="totalPages > 1" class="mt-6 flex items-center justify-between">
         <div class="text-sm text-gray-500">
-          Showing {{ paginationStart }} to {{ paginationEnd }} of {{ totalComments }} comments
+          {{ totalComments }} 개의 댓글 중 {{ paginationStart }} 번째 부터 {{ paginationEnd }} 번째 댓글
         </div>
         <div class="flex gap-2">
           <button

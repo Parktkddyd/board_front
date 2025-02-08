@@ -6,7 +6,7 @@
         <h3 class="text-lg font-semibold">Connect With Us</h3>
         <div class="flex space-x-6">
           <a 
-            href="https://twitter.com" 
+            href="#" 
             target="_blank" 
             rel="noopener noreferrer"
             class="text-gray-600 hover:text-blue-600 transition-colors"
