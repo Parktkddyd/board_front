@@ -34,8 +34,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   name: 'ReplyForm',
   props: {
@@ -78,12 +76,10 @@ export default {
       this.error = ''
 
       try {
-        await axios.post(process.env.VUE_APP_BACK_URL + `/boards/${this.boardId}/comments/repost`, {
+        await this.$axios.post(`/boards/${this.boardId}/comments/repost`, {
           comment_content: this.replyContent,
           parent_id: this.parentId
-        },
-        {withCredentials : true}
-    )
+        })
         this.replyContent = ''
         this.$emit('submit')
       } catch (err) {

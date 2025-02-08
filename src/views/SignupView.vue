@@ -260,7 +260,6 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
   name: "SignupForm",
@@ -330,8 +329,7 @@ export default {
     },
     async checkUserId() {
       try {
-        const response = await axios.post(
-          process.env.VUE_APP_BACK_URL + "/users/signup/duplicate",
+        const response = await this.$axios.post("/users/signup/duplicate",
           {
             user_id: this.form.userId,
           }
@@ -451,8 +449,7 @@ export default {
 
       try {
         //API call
-        const response = await axios.post(
-          process.env.VUE_APP_BACK_URL + "/users/signup",
+        const response = await this.$axios.post("/users/signup",
           {
             user_id: this.form.userId,
             user_password: this.form.password,

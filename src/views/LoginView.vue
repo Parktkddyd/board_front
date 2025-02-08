@@ -131,7 +131,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import { mapActions } from 'vuex';
 
 export default {
@@ -178,14 +177,10 @@ export default {
       this.globalError = "";
 
       try {
-        const response = await axios.post(
-          process.env.VUE_APP_BACK_URL + "/users/login",
+        const response = await this.$axios.post("/users/login",
           {
             user_id: this.form.userId,
             user_password: this.form.password,
-          },
-          {
-            withCredentials: true
           }
         );
 

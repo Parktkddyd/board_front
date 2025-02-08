@@ -166,7 +166,7 @@ export default {
       this.error = null
       
       try {
-        const response = await this.$axios.get(process.env.VUE_APP_BACK_URL + '/boards', {
+        const response = await this.$axios.get('/boards', {
           params: {
             page: this.currentPage-1,
             size: this.pageSize,

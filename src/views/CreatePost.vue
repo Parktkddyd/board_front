@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import PostForm from '@/components/PostForm.vue'
 import { mapGetters } from 'vuex'
 
@@ -49,13 +48,12 @@ export default {
       this.loading = true
       this.error = null
       try {
-        const response = await axios.post(process.env.VUE_APP_BACK_URL + '/boards/post',
+        const response = await this.$axios.post('/boards/post',
          {
           board_title : formData.title,
           board_content: formData.content,
           user_id : this.currentUser
-         },
-        {withCredentials : true})
+         })
         this.$router.push(`/boards/${response.data.data.board_id}`)
       } catch (err) {
         this.error = '게시글 작성에 실패했습니다 다시 시도해 주세요'

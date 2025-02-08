@@ -188,7 +188,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { mapGetters } from 'vuex'
 import CreateComment from '@/components/CreateComment.vue'
 import ResponseWrapper from '@/components/ResponseWrapper.vue';
@@ -220,7 +219,7 @@ export default {
       this.error = null
       
       try {
-        const {data} = await this.$axios.get(process.env.VUE_APP_BACK_URL + `/boards/${this.$route.params.id}`)
+        const {data} = await this.$axios.get(`/boards/${this.$route.params.id}`)
         this.response = data
     
         if(data.header.statusCode == 200){
@@ -260,7 +259,7 @@ export default {
     },
     async deletePost() {
       try {
-        await axios.delete(process.env.VUE_APP_BACK_URL + `/boards/${this.$route.params.id}`, {withCredentials : true})
+        await this.$axios.delete(`/boards/${this.$route.params.id}`)
         this.$router.push('/')
       } catch (err) {
         console.error('삭제 실패', err)

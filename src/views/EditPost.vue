@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import PostForm from '@/components/PostForm.vue'
 
 export default {
@@ -60,7 +59,7 @@ export default {
   methods: {
     async fetchPost() {
       try {
-        const response = await axios.get(process.env.VUE_APP_BACK_URL + `/boards/${this.postId}`, {withCredentials : true})
+        const response = await this.$axios.get(`/boards/${this.postId}`)
         this.post = response.data.data
         this.editedPost = {
           title: response.data.data.board_title,
@@ -78,11 +77,10 @@ export default {
       this.error = null
 
       try {
-        await axios.put(process.env.VUE_APP_BACK_URL + `/boards/${this.postId}`,  {
+        await this.$axios.put(`/boards/${this.postId}`,  {
           board_title : formData.title,
           board_content: formData.content,
-         },
-        {withCredentials : true})
+         })
         this.$router.push(`/boards/${this.postId}`)
       } catch (err) {
         this.error = '게시글 수정에 실패했습니다 다시 시도해 주세요'

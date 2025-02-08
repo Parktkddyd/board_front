@@ -127,7 +127,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import axios from 'axios'
 import CommentForm from './CommentForm.vue'
 
 export default {
@@ -198,18 +197,17 @@ export default {
     async fetchComments() {
       this.loading = true
       try {
-        const response = await axios.get(process.env.VUE_APP_BACK_URL + `/boards/${this.boardId}/comments`, {
+        const response = await this.$axios.get(process.env.VUE_APP_BACK_URL + `/boards/${this.boardId}/comments`, {
           params: {
             page: this.currentPage-1,
             size: this.commentsPerPage
-          }
+          },
         })
-        
         this.comments = response.data.data.content
         this.totalComments = response.data.data.totalElements
         this.totalPages = response.data.data.totalPages
       } catch (err) {
-        console.error('게시글 로드 에러:', err)
+        console.error('댓글 로드 에러:', err)
       } finally {
         this.loading = false
       }
@@ -229,10 +227,9 @@ export default {
       this.commentError = ''
 
       try {
-        await axios.post(process.env.VUE_APP_BACK_URL + `/boards/${this.boardId}/comments/post`, {
+        await this.$axios.post(`/boards/${this.boardId}/comments/post`, {
           comment_content: this.newComment
-        },
-      {withCredentials : true})
+        })
         
         this.newComment = ''
         await this.fetchComments()
@@ -249,7 +246,7 @@ export default {
     },
     async confirmDeleteComment() {
       try {
-        await axios.delete(process.env.VUE_APP_BACK_URL + `/boards/${this.boardId}/comments/${this.commentToDelete}`, {withCredentials : true})
+        await this.$axios.delete(`/boards/${this.boardId}/comments/${this.commentToDelete}`)
         await this.fetchComments()
       } catch (err) {
         console.error('댓글 삭제 에러:', err)
