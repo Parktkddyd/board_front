@@ -1,0 +1,23 @@
+# 환경 변수 파일 제외 (보안 위험 방지)
+.git
+.gitignore
+.dockerignore
+Dockerfile
+.env.production
+
+# Node.js 관련 불필요한 파일들
+node_modules
+
+# 빌드 결과물이 아닌 소스 코드 관련 설정 파일 제외
+.git
+.gitignore
+.DS_Store
+.vscode
+.idea
+
+# 빌드 시 필요 없는 설정 파일들
+babel.config.js
+jsconfig.json
+postcss.config.js
+tailwind.config.js
+vue.config.js
