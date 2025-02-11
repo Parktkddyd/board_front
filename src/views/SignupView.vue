@@ -329,7 +329,7 @@ export default {
     },
     async checkUserId() {
       try {
-        const response = await this.$axios.post("/users/signup/duplicate",
+        const response = await this.$axios.post("/api/v1/users/signup/duplicate",
           {
             user_id: this.form.userId,
           }
@@ -449,7 +449,7 @@ export default {
 
       try {
         //API call
-        const response = await this.$axios.post("/users/signup",
+        const response = await this.$axios.post("/api/v1/users/signup",
           {
             user_id: this.form.userId,
             user_password: this.form.password,

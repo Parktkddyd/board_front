@@ -4,7 +4,7 @@
       <!-- Logo & Main Navigation -->
       <div class="flex items-center gap-6">
         <router-link to="/" class="text-xl font-bold">
-          테스트 게시판
+          자유로운 게시판
         </router-link>
         <div class="hidden md:flex gap-4">
           <router-link 
@@ -58,7 +58,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import axios from 'axios'
 export default {
   name: 'NavigationBar',
   computed: {
@@ -72,12 +71,7 @@ export default {
     },
 
     async handleLogout(){
-        const response = await axios.get(
-              process.env.VUE_APP_BACK_URL + '/users/logout', 
-              {
-                withCredentials: true
-            }
-          );
+        const response = await this.$axios.get('/api/v1/users/logout');
           if(response.data.header.customStatusCode == 'ACCOUNT-LOGOUT-200')
             await this.logout()
     }

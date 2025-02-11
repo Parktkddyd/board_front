@@ -177,7 +177,7 @@ export default {
       this.globalError = "";
 
       try {
-        const response = await this.$axios.post("/users/login",
+        const response = await this.$axios.post("/api/v1/users/login",
           {
             user_id: this.form.userId,
             user_password: this.form.password,

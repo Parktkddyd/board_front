@@ -22,7 +22,7 @@ export default new Vuex.Store({
     actions: {
         async checkAuth({ commit }) {
             try {
-                const response = await this.$axios.get('/users/session/check');
+                const response = await this.$axios.get('/api/v1/users/session/check');
                 if (response.data.header.customStatusCode != 'USER-ACCESS-200') throw new Error('Invalid Session')
                 commit('SET_AUTH', response.data.data.user_id)
                 return true
