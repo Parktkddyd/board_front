@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
@@ -22,7 +24,7 @@ export default new Vuex.Store({
     actions: {
         async checkAuth({ commit }) {
             try {
-                const response = await this.$axios.get('/api/v1/users/session/check');
+                const response = await axios.get('/api/v1/users/session/check')
                 if (response.data.header.customStatusCode != 'USER-ACCESS-200') throw new Error('Invalid Session')
                 commit('SET_AUTH', response.data.data.user_id)
                 return true
@@ -42,4 +44,11 @@ export default new Vuex.Store({
         isAuthenticated: state => state.isAuthenticated,
         currentUser: state => state.user
     },
+    plugins: [
+        createPersistedState({
+            key: 'vuex_auth',
+            paths: ['isAuthenticated', 'user'],
+            storage: window.localStorage,
+        })
+    ]
 })

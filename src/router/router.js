@@ -72,13 +72,16 @@ router.beforeEach(async (to, from, next) => {
 
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!isAuthenticated) {
-      next({
-        path: '/login',
-        query: { redirect: to.fullPath }
-      })
-    } else {
-      next()
+      const isValid = await store.dispatch('checkAuth');
+
+      if (!isValid) {
+        return next({
+          path: '/login',
+          query: { redirect: to.fullPath }
+        })
+      }
     }
+    next()
   } else if (to.matched.some(record => record.meta.guest)) {
     if (isAuthenticated) {
       next('/')
