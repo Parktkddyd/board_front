@@ -197,7 +197,7 @@ export default {
     async fetchComments() {
       this.loading = true
       try {
-        const response = await this.$axios.get(process.env.VUE_APP_BACK_URL + `/boards/${this.boardId}/comments`, {
+        const response = await this.$axios.get(`/api/v1/boards/${this.boardId}/comments`, {
           params: {
             page: this.currentPage-1,
             size: this.commentsPerPage
@@ -227,7 +227,7 @@ export default {
       this.commentError = ''
 
       try {
-        await this.$axios.post(`/boards/${this.boardId}/comments/post`, {
+        await this.$axios.post(`/api/v1/boards/${this.boardId}/comments/post`, {
           comment_content: this.newComment
         })
         
@@ -246,7 +246,7 @@ export default {
     },
     async confirmDeleteComment() {
       try {
-        await this.$axios.delete(`/boards/${this.boardId}/comments/${this.commentToDelete}`)
+        await this.$axios.delete(`/api/v1/boards/${this.boardId}/comments/${this.commentToDelete}`)
         await this.fetchComments()
       } catch (err) {
         console.error('댓글 삭제 에러:', err)

@@ -166,7 +166,7 @@ export default {
       this.error = null
       
       try {
-        const response = await this.$axios.get('/boards', {
+        const response = await this.$axios.get('/api/v1/boards', {
           params: {
             page: this.currentPage-1,
             size: this.pageSize,

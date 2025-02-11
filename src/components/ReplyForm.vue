@@ -76,7 +76,7 @@ export default {
       this.error = ''
 
       try {
-        await this.$axios.post(`/boards/${this.boardId}/comments/repost`, {
+        await this.$axios.post(`/api/v1/boards/${this.boardId}/comments/repost`, {
           comment_content: this.replyContent,
           parent_id: this.parentId
         })

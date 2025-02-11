@@ -59,7 +59,7 @@ export default {
   methods: {
     async fetchPost() {
       try {
-        const response = await this.$axios.get(`/boards/${this.postId}`)
+        const response = await this.$axios.get(`/api/v1/boards/${this.postId}`)
         this.post = response.data.data
         this.editedPost = {
           title: response.data.data.board_title,
@@ -77,7 +77,7 @@ export default {
       this.error = null
 
       try {
-        await this.$axios.put(`/boards/${this.postId}`,  {
+        await this.$axios.put(`/api/v1/boards/${this.postId}`,  {
           board_title : formData.title,
           board_content: formData.content,
          })

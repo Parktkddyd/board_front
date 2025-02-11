@@ -48,7 +48,7 @@ export default {
       this.loading = true
       this.error = null
       try {
-        const response = await this.$axios.post('/boards/post',
+        const response = await this.$axios.post('/api/v1/boards/post',
          {
           board_title : formData.title,
           board_content: formData.content,
